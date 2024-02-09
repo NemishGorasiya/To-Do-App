@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main">
+        <div class="heading">
+            <h1>To-Do List</h1>
+            <!-- <button><i class="fa-solid fa-sun"></i></button> -->
+            <!-- <button><i class="fa-solid fa-moon"></i></button> -->
+        </div>
+        <div class="addToDoDiv">
+            <div class="input">
+                <input type="text" name="todo" id="addToDo" placeholder="Add To-Do Here ...">
+                <button class="cross" id="cross" onclick="clearInput()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <button class="addBtn" onclick="addToDoFunction()">Add</button>
+        </div>
+        <div class="toDoDiv" id="toDoDiv">
+          
+        </div>
+    </div>
+
+
+
+
+    <script src="
+https://kit.fontawesome.com/f1d5fed0d8.js"
+crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>
