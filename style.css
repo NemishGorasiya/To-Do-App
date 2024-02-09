@@ -106,7 +106,7 @@ body button {
 .main .toDo .toDoLeft span{
   margin-left: 6px;
   /* width: auto; */
-  text-overflow: ellipsis;
+  /* text-overflow: ellipsis; */
   overflow: hidden;
   white-space: nowrap;
   /* background: red; */
