@@ -63,6 +63,7 @@ function displayToDo() {
       </div>`;
     }
     // console.log(s);
+    console.log(arr);
     toDoDiv.innerHTML = s;
 }
 
