@@ -1,76 +1,117 @@
-let addToDo = document.getElementById("addToDo");
+let arr = [];
 let cross = document.getElementById("cross");
+let newToDo = document.getElementById("newToDo");
 let toDoDiv = document.getElementById("toDoDiv");
 
-const clearInput = () => {
-  addToDo.value = "";
-  cross.style.display = "none";
-};
+newToDo.addEventListener("keypress",(event)=>{
+    if (event.key === "Enter") {
+        if (event.target.value === "") {
+            alert("To-Do can't be empty");
+        }else{
+            event.preventDefault();
+            addToDoFunction();
+        }
+    }
+})
 
-addToDo.addEventListener("input", () => {
-  if (addToDo.value === "") {
+function newToDoFunction(e){
+    if (e.target.value !== "") {
+        cross.style.display = "block";
+    }else{
+        cross.style.display = "none";
+    }
+}
+
+function clearInput(){
+    newToDo.value = "";
     cross.style.display = "none";
-  } else {
-    cross.style.display = "block";
-  }
-});
+}
 
-let newToDoString = "";
-const addToDoFunction = () => {
-  newToDoString = `
-    <div class="toDoLeft">
-                    <input type="checkbox" name="done" id="done">
-                    <span class="toDoText">${addToDo.value}</span>    
-                    <input type="text" value="" style="display: none;">
-                </div>
-                <div class="toDoRight">
-                    <span class="status pending">Pending</span>
-                    <span class="status completed">Completed</span>
-                    <button onclick="editToDo(event)"><i class="fa-solid fa-pen"></i></button>
-                    <button onclick="deleteToDo(event)"><i class="fa-solid fa-trash"></i></button>
-                </div>
-                <button class="saveBtn" onclick="saveEdit(event)">Save</button>`;
-  addToDo.value = "";
-  cross.style.display = "none";
-  let ele = document.createElement("div");
-  ele.classList.add("toDo");
-  ele.innerHTML = newToDoString;
-  // console.log(toDoDiv);
-  toDoDiv.appendChild(ele);
-};
+function addToDoFunction() {
+    if (newToDo.value === "") {
+        alert("To-Do can't be empty");
+        return;
+    }
+    let x = {
+        "toDo" : newToDo.value.trim(),
+        "completed" : false
+    }
+    arr.push(x);
+    cross.style.display = "none";
+    newToDo.value = "";
+    // console.log(arr);
+    displayToDo();
+}
 
-const editToDo = (e) => {
-    console.log(e.target.parentElement.parentElement.parentElement);
-    e.target.parentElement.parentElement.parentElement.style.pointerEvents = "auto";
-  let ele =
-    e.target.parentElement.parentElement.parentElement.firstElementChild;
-  let elementToRemove = ele.children[1];
-  let elementToAdd = ele.children[2];
-  // console.log(ele);
-  elementToRemove.style.display = "none";
-  elementToAdd.value = elementToRemove.innerHTML;
-  elementToAdd.style.display = "block";
-  console.log(elementToRemove);
-  console.log(elementToAdd);
+function displayToDo() {
+    // console.log("called");
+    let s = "";
+    for (let i in arr) {
+        s += `<div class="toDo ${arr[i].completed === true ? "completed" : ""}" data-id="${i}">
+        <div class="toDoLeft">
+            <input class="check" type="checkbox" name="status" onclick="disableToDo(${i})" ${arr[i].completed === true ? "checked" : ""}>
+            <span class="toDoText">${arr[i].toDo}</span>
+            <input class="toDoEdit" type="text" placeholder="" value="${arr[i].toDo}">
+        </div>
+        <div class="toDoRight">
+            <span class="status pending"><img src="./Assets/pending.png" alt="" srcset=""><span>Pending</span></span>
+            <span class="status completed"><img src="./Assets/completed.png" alt="" srcset=""><span>completed</span></span>
+            <button onclick="editToDo(${i})"><i class="fa-solid fa-pen"></i></button>
+            <button onclick="deleteToDo(${i})"><i class="fa-solid fa-trash"></i></button>
+        </div>
+        <button class="saveBtn" onclick="saveEdit(${i})">Save</button>
+      </div>`;
+    }
+    // console.log(s);
+    console.log(arr);
+    toDoDiv.innerHTML = s;
+}
 
-  let rightEle = e.target.parentElement.parentElement;
-  let saveBtn = rightEle.nextElementSibling;
-  rightEle.style.display = "none";
-  saveBtn.style.display = "block";
+function editToDo(idx) {
+    let ele = document.querySelectorAll(".toDoDiv .toDo")[idx];
+    ele.classList.add("editMode");
+    ele.classList.remove("completed");
+    ele.querySelector(".toDoLeft .toDoEdit").addEventListener("keypress",(event)=>{
+        if (event.key === "Enter") {
+            saveEdit(idx);
+        }
+    })
+}
 
-};
-const saveEdit = (e) => {
-  console.log(e.target);
-  e.target.parentElement.children[1].style.display = "block";
-  let eleToDisplay = e.target.parentElement.children[0].children[1];
-  eleToHide = e.target.parentElement.children[0].children[2];
-  console.log("dis", eleToDisplay);
-  eleToDisplay.innerHTML = eleToHide.value;
-  eleToDisplay.style.display = "block";
-  eleToHide.style.display = "none";
-  e.target.style.display = "none";
-  e.target.parentElement.children[0].children[0].checked = false;
-};
-const deleteToDo = (e) => {
-  e.target.parentElement.parentElement.parentElement.remove();
-};
+function disableToDo(idx) {
+    let ele = document.querySelectorAll(".toDoDiv .toDo")[idx];
+    if (event.target.checked) {
+        ele.classList.add("completed");
+        arr[idx].completed = true;
+        // console.log("arr",arr);
+    }
+}
+
+function deleteToDo(idx) {
+    arr.splice(idx,1);
+    // console.log(arr);
+    displayToDo();
+}
+
+function saveEdit(idx) {
+    let ele = document.querySelectorAll(".toDoDiv .toDo")[idx];
+    let newToDo = ele.querySelector(".toDoLeft .toDoEdit").value;
+    if (newToDo === "") {
+        alert("To-Do can't be empty");
+    }else{
+        ele.querySelector(".toDoLeft .toDoText").innerHTML = newToDo;
+        ele.classList.remove("editMode");
+        arr[idx].toDo = newToDo;
+        if (ele.querySelector(".toDoLeft input.check").checked) {
+            ele.classList.add("completed");
+            arr[idx].completed = true;
+        }else{
+            ele.classList.remove("completed");
+            arr[idx].completed = false;
+        }
+        arr[idx].toDo = newToDo;
+    }
+}
+
+
+
