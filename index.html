@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
+
 <body>
     <div class="main">
         <div class="heading">
@@ -18,26 +22,14 @@
         </div>
         <div class="addToDoDiv">
             <div class="input">
-                <input type="text" name="todo" id="newToDo" oninput="newToDoFunction(event)" placeholder="Add To-Do Here ...">
+                <input type="text" name="todo" id="newToDo" oninput="newToDoFunction(event)"
+                    placeholder="Add To-Do Here ...">
                 <button class="cross" id="cross" onclick="clearInput()"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <button class="addBtn" onclick="addToDoFunction()">Add</button>
         </div>
         <div class="toDoDiv" id="toDoDiv">
-          <div class="toDo" data-id="1">
-            <div class="toDoLeft" >
-                <input type="checkbox" name="status" onclick="disableToDo(1)">
-                <span class="toDoText">efgggggggqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggqqqqqqqqqqqqqqqqqqqqqqqqqqq</span>
-                <input type="text" placeholder="">
-            </div>
-            <div class="toDoRight">
-                <span class="status">Pending</span>
-                <!-- <span class="status completed">completed</span> -->
-                <button onclick="editToDo(1)"><i class="fa-solid fa-pen"></i></button>
-                <button onclick="deletToDo(1)"><i class="fa-solid fa-trash"></i></button>
-            </div>
-            <button class="saveBtn" onclick="saveEdit(1)">Save</button>
-          </div>
+
         </div>
     </div>
 
@@ -45,8 +37,8 @@
 
 
     <script src="
-https://kit.fontawesome.com/f1d5fed0d8.js"
-crossorigin="anonymous"></script>
+https://kit.fontawesome.com/f1d5fed0d8.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
